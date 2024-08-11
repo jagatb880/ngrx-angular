@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BucketComponent } from './components/bucket/bucket.component';
 import { GroceryComponent } from './components/grocery/grocery.component';
+import { Store } from '@ngrx/store';
+import { Grocery } from '../models/grocery.model';
+import { groceryActions } from './store/actions/grocery.action';
 
 
 @Component({
@@ -12,5 +15,10 @@ import { GroceryComponent } from './components/grocery/grocery.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+  constructor(private store: Store<{groceries: Grocery[]}>){
+    this.store.dispatch(groceryActions.loadGroceries());
+    
+  }
 
 }
